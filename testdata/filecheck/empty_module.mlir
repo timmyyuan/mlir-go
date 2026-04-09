@@ -1,0 +1,3 @@
+// CHECK: module {
+// CHECK-NEXT: }
+

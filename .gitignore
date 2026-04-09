@@ -26,7 +26,26 @@ go.work.sum
 
 # env file
 .env
+.envrc
+.direnv/
 
-# Editor/IDE
-# .idea/
-# .vscode/
+# OS / Editor / IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Local build outputs
+bin/
+dist/
+
+# Profiling and debug artifacts
+*.prof
+*.pprof
+cpu.out
+mem.out
+*.tmp
+*.actual
+
+# Local tooling caches
+.cache/
+compile_commands.json

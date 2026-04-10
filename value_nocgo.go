@@ -2,6 +2,8 @@
 
 package mlir
 
+import "fmt"
+
 type Value struct{}
 
 func (v Value) IsNull() bool {
@@ -22,4 +24,28 @@ func (v Value) Type() Type {
 
 func (v Value) String() string {
 	return ""
+}
+
+func (v Value) Equal(Value) bool {
+	return false
+}
+
+func (v Value) OwnerBlock() Block {
+	return Block{}
+}
+
+func (v Value) ArgumentNumber() int {
+	return -1
+}
+
+func (v Value) OwnerOperation() Operation {
+	return Operation{}
+}
+
+func (v Value) ResultNumber() int {
+	return -1
+}
+
+func (v Value) SetType(Type) error {
+	return fmt.Errorf("mlir: cgo is required")
 }

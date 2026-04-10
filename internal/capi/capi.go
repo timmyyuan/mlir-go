@@ -7,6 +7,8 @@ package capi
 #include <string.h>
 
 #include "mlir-c/IR.h"
+#include "mlir-c/Pass.h"
+#include "mlir-c/ExecutionEngine.h"
 #include "mlir-c/RegisterEverything.h"
 
 struct MlirGoStringBuffer {
@@ -52,6 +54,30 @@ static struct MlirGoStringBuffer mlirGoValueToString(MlirValue value) {
 static struct MlirGoStringBuffer mlirGoTypeToString(MlirType type) {
 	struct MlirGoStringBuffer buf = {0};
 	mlirTypePrint(type, mlirGoStringCallback, &buf);
+	return buf;
+}
+
+static struct MlirGoStringBuffer mlirGoAttributeToString(MlirAttribute attr) {
+	struct MlirGoStringBuffer buf = {0};
+	mlirAttributePrint(attr, mlirGoStringCallback, &buf);
+	return buf;
+}
+
+struct MlirGoParsePassPipelineResult {
+	MlirLogicalResult result;
+	struct MlirGoStringBuffer buffer;
+};
+
+static struct MlirGoParsePassPipelineResult mlirGoParsePassPipeline(
+    MlirOpPassManager passManager, MlirStringRef pipeline) {
+	struct MlirGoParsePassPipelineResult out = {0};
+	out.result = mlirParsePassPipeline(passManager, pipeline, mlirGoStringCallback, &out.buffer);
+	return out;
+}
+
+static struct MlirGoStringBuffer mlirGoPrintPassPipeline(MlirOpPassManager passManager) {
+	struct MlirGoStringBuffer buf = {0};
+	mlirPrintPassPipeline(passManager, mlirGoStringCallback, &buf);
 	return buf;
 }
 
@@ -102,6 +128,30 @@ type Type struct {
 	c C.MlirType
 }
 
+type Attribute struct {
+	c C.MlirAttribute
+}
+
+type NamedAttribute struct {
+	c C.MlirNamedAttribute
+}
+
+type SymbolTable struct {
+	c C.MlirSymbolTable
+}
+
+type PassManager struct {
+	c C.MlirPassManager
+}
+
+type OpPassManager struct {
+	c C.MlirOpPassManager
+}
+
+type ExecutionEngine struct {
+	c C.MlirExecutionEngine
+}
+
 func NullContext() Context {
 	return Context{}
 }
@@ -150,6 +200,14 @@ func RegisterAllDialects(registry DialectRegistry) {
 	C.mlirRegisterAllDialects(registry.c)
 }
 
+func RegisterAllPasses() {
+	C.mlirRegisterAllPasses()
+}
+
+func RegisterAllLLVMTranslations(ctx Context) {
+	C.mlirRegisterAllLLVMTranslations(ctx.c)
+}
+
 func NullModule() Module {
 	return Module{}
 }
@@ -185,6 +243,10 @@ func ModuleGetBody(module Module) Block {
 
 func OperationIsNull(op Operation) bool {
 	return bool(C.mlirOperationIsNull(op.c))
+}
+
+func OperationDestroy(op Operation) {
+	C.mlirOperationDestroy(op.c)
 }
 
 func OperationToString(op Operation) string {
@@ -298,6 +360,14 @@ func IdentifierToString(id Identifier) string {
 	return C.GoStringN(str.data, C.int(str.length))
 }
 
+func IdentifierGet(ctx Context, name string) Identifier {
+	cstr := C.CString(name)
+	defer C.free(unsafe.Pointer(cstr))
+	return Identifier{
+		c: C.mlirIdentifierGet(ctx.c, C.mlirStringRefCreate(cstr, C.size_t(len(name)))),
+	}
+}
+
 func BlockGetNumArguments(block Block) int {
 	return int(C.mlirBlockGetNumArguments(block.c))
 }
@@ -373,4 +443,222 @@ func TypeToString(typ Type) string {
 		return ""
 	}
 	return C.GoStringN(buf.data, C.int(buf.length))
+}
+
+func NullAttribute() Attribute {
+	return Attribute{}
+}
+
+func AttributeParseGet(ctx Context, asm string) Attribute {
+	cstr := C.CString(asm)
+	defer C.free(unsafe.Pointer(cstr))
+
+	return Attribute{
+		c: C.mlirAttributeParseGet(ctx.c, C.mlirStringRefCreate(cstr, C.size_t(len(asm)))),
+	}
+}
+
+func AttributeIsNull(attr Attribute) bool {
+	return bool(C.mlirAttributeIsNull(attr.c))
+}
+
+func AttributeToString(attr Attribute) string {
+	buf := C.mlirGoAttributeToString(attr.c)
+	defer C.mlirGoStringBufferDestroy(buf)
+	if buf.data == nil || buf.length == 0 {
+		return ""
+	}
+	return C.GoStringN(buf.data, C.int(buf.length))
+}
+
+func NamedAttributeGet(name Identifier, attr Attribute) NamedAttribute {
+	return NamedAttribute{c: C.mlirNamedAttributeGet(name.c, attr.c)}
+}
+
+func NamedAttributeName(attr NamedAttribute) Identifier {
+	return Identifier{c: attr.c.name}
+}
+
+func NamedAttributeAttribute(attr NamedAttribute) Attribute {
+	return Attribute{c: attr.c.attribute}
+}
+
+func RegionCreate() Region {
+	return Region{c: C.mlirRegionCreate()}
+}
+
+func RegionDestroy(region Region) {
+	C.mlirRegionDestroy(region.c)
+}
+
+func RegionAppendOwnedBlock(region Region, block Block) {
+	C.mlirRegionAppendOwnedBlock(region.c, block.c)
+}
+
+func BlockCreate(argTypes []Type, argLocs []Location) Block {
+	var typesPtr *C.MlirType
+	var locsPtr *C.MlirLocation
+
+	if len(argTypes) > 0 {
+		cTypes := make([]C.MlirType, len(argTypes))
+		for i, v := range argTypes {
+			cTypes[i] = v.c
+		}
+		typesPtr = &cTypes[0]
+		if len(argLocs) > 0 {
+			cLocs := make([]C.MlirLocation, len(argLocs))
+			for i, v := range argLocs {
+				cLocs[i] = v.c
+			}
+			locsPtr = &cLocs[0]
+			return Block{c: C.mlirBlockCreate(C.intptr_t(len(cTypes)), typesPtr, locsPtr)}
+		}
+		return Block{c: C.mlirBlockCreate(C.intptr_t(len(cTypes)), typesPtr, nil)}
+	}
+
+	return Block{c: C.mlirBlockCreate(0, nil, nil)}
+}
+
+func BlockDestroy(block Block) {
+	C.mlirBlockDestroy(block.c)
+}
+
+func BlockAppendOwnedOperation(block Block, op Operation) {
+	C.mlirBlockAppendOwnedOperation(block.c, op.c)
+}
+
+func BlockInsertOwnedOperationBefore(block Block, ref Operation, op Operation) {
+	C.mlirBlockInsertOwnedOperationBefore(block.c, ref.c, op.c)
+}
+
+func BlockAddArgument(block Block, typ Type, loc Location) Value {
+	return Value{c: C.mlirBlockAddArgument(block.c, typ.c, loc.c)}
+}
+
+func ValueReplaceAllUsesOfWith(from, to Value) {
+	C.mlirValueReplaceAllUsesOfWith(from.c, to.c)
+}
+
+func OperationCreate(name string, loc Location, results []Type, operands []Value, regions []Region, successors []Block, attrs []NamedAttribute, inferResults bool) Operation {
+	cname := C.CString(name)
+	defer C.free(unsafe.Pointer(cname))
+
+	state := C.mlirOperationStateGet(C.mlirStringRefCreate(cname, C.size_t(len(name))), loc.c)
+
+	if len(results) > 0 {
+		cResults := make([]C.MlirType, len(results))
+		for i, v := range results {
+			cResults[i] = v.c
+		}
+		C.mlirOperationStateAddResults(&state, C.intptr_t(len(cResults)), &cResults[0])
+	}
+	if len(operands) > 0 {
+		cOperands := make([]C.MlirValue, len(operands))
+		for i, v := range operands {
+			cOperands[i] = v.c
+		}
+		C.mlirOperationStateAddOperands(&state, C.intptr_t(len(cOperands)), &cOperands[0])
+	}
+	if len(regions) > 0 {
+		cRegions := make([]C.MlirRegion, len(regions))
+		for i, v := range regions {
+			cRegions[i] = v.c
+		}
+		C.mlirOperationStateAddOwnedRegions(&state, C.intptr_t(len(cRegions)), &cRegions[0])
+	}
+	if len(successors) > 0 {
+		cSuccessors := make([]C.MlirBlock, len(successors))
+		for i, v := range successors {
+			cSuccessors[i] = v.c
+		}
+		C.mlirOperationStateAddSuccessors(&state, C.intptr_t(len(cSuccessors)), &cSuccessors[0])
+	}
+	if len(attrs) > 0 {
+		cAttrs := make([]C.MlirNamedAttribute, len(attrs))
+		for i, v := range attrs {
+			cAttrs[i] = v.c
+		}
+		C.mlirOperationStateAddAttributes(&state, C.intptr_t(len(cAttrs)), &cAttrs[0])
+	}
+	if inferResults {
+		C.mlirOperationStateEnableResultTypeInference(&state)
+	}
+
+	return Operation{c: C.mlirOperationCreate(&state)}
+}
+
+func PassManagerCreate(ctx Context) PassManager {
+	return PassManager{c: C.mlirPassManagerCreate(ctx.c)}
+}
+
+func PassManagerDestroy(pm PassManager) {
+	C.mlirPassManagerDestroy(pm.c)
+}
+
+func PassManagerIsNull(pm PassManager) bool {
+	return bool(C.mlirPassManagerIsNull(pm.c))
+}
+
+func PassManagerGetAsOpPassManager(pm PassManager) OpPassManager {
+	return OpPassManager{c: C.mlirPassManagerGetAsOpPassManager(pm.c)}
+}
+
+func PassManagerRunOnOp(pm PassManager, op Operation) bool {
+	return bool(C.mlirLogicalResultIsSuccess(C.mlirPassManagerRunOnOp(pm.c, op.c)))
+}
+
+func ParsePassPipeline(opm OpPassManager, pipeline string) (bool, string) {
+	cstr := C.CString(pipeline)
+	defer C.free(unsafe.Pointer(cstr))
+	out := C.mlirGoParsePassPipeline(opm.c, C.mlirStringRefCreate(cstr, C.size_t(len(pipeline))))
+	defer C.mlirGoStringBufferDestroy(out.buffer)
+	msg := ""
+	if out.buffer.data != nil && out.buffer.length > 0 {
+		msg = C.GoStringN(out.buffer.data, C.int(out.buffer.length))
+	}
+	return bool(C.mlirLogicalResultIsSuccess(out.result)), msg
+}
+
+func PrintPassPipeline(opm OpPassManager) string {
+	buf := C.mlirGoPrintPassPipeline(opm.c)
+	defer C.mlirGoStringBufferDestroy(buf)
+	if buf.data == nil || buf.length == 0 {
+		return ""
+	}
+	return C.GoStringN(buf.data, C.int(buf.length))
+}
+
+func ExecutionEngineCreate(module Module, optLevel int) ExecutionEngine {
+	return ExecutionEngine{
+		c: C.mlirExecutionEngineCreate(module.c, C.int(optLevel), 0, nil, C.bool(false)),
+	}
+}
+
+func ExecutionEngineDestroy(engine ExecutionEngine) {
+	C.mlirExecutionEngineDestroy(engine.c)
+}
+
+func ExecutionEngineIsNull(engine ExecutionEngine) bool {
+	return bool(C.mlirExecutionEngineIsNull(engine.c))
+}
+
+func ExecutionEngineInvokePacked(engine ExecutionEngine, name string, args []unsafe.Pointer) bool {
+	cname := C.CString(name)
+	defer C.free(unsafe.Pointer(cname))
+
+	var cArgs unsafe.Pointer
+	if len(args) > 0 {
+		size := C.size_t(len(args)) * C.size_t(unsafe.Sizeof(uintptr(0)))
+		cArgs = C.malloc(size)
+		defer C.free(cArgs)
+		slice := unsafe.Slice((*unsafe.Pointer)(cArgs), len(args))
+		copy(slice, args)
+	}
+
+	result := C.mlirExecutionEngineInvokePacked(
+		engine.c,
+		C.mlirStringRefCreate(cname, C.size_t(len(name))),
+		(*unsafe.Pointer)(cArgs),
+	)
+	return bool(C.mlirLogicalResultIsSuccess(result))
 }

@@ -2,6 +2,8 @@
 
 package mlir
 
+import "fmt"
+
 type Region struct{}
 
 func (r Region) IsNull() bool {
@@ -10,4 +12,8 @@ func (r Region) IsNull() bool {
 
 func (r Region) Blocks() []Block {
 	return nil
+}
+
+func (r Region) AppendOwnedBlock(*OwnedBlock) (Block, error) {
+	return Block{}, fmt.Errorf("mlir: cgo is required")
 }

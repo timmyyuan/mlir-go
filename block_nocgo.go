@@ -2,6 +2,8 @@
 
 package mlir
 
+import "fmt"
+
 type Block struct{}
 
 func (b Block) IsNull() bool {
@@ -18,4 +20,28 @@ func (b Block) Arguments() []Value {
 
 func (b Block) Operations() []Operation {
 	return nil
+}
+
+func (b Block) ParentOperation() Operation {
+	return Operation{}
+}
+
+func (b Block) ParentRegion() Region {
+	return Region{}
+}
+
+func (b Block) Terminator() Operation {
+	return Operation{}
+}
+
+func (b Block) AppendOwnedOperation(*OwnedOperation) (Operation, error) {
+	return Operation{}, fmt.Errorf("mlir: cgo is required")
+}
+
+func (b Block) InsertOwnedOperationBefore(Operation, *OwnedOperation) (Operation, error) {
+	return Operation{}, fmt.Errorf("mlir: cgo is required")
+}
+
+func (b Block) AddArgument(Type, Location) (Value, error) {
+	return Value{}, fmt.Errorf("mlir: cgo is required")
 }

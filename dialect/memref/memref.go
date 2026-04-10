@@ -1,0 +1,54 @@
+//go:build cgo
+
+package memref
+
+import (
+	"fmt"
+	"strconv"
+
+	mlir "github.com/timmyyuan/mlir-go"
+)
+
+func Alloca(ctx *mlir.Context, loc mlir.Location, resultType mlir.Type, dynamicSizes ...mlir.Value) (*mlir.OwnedOperation, error) {
+	if resultType.IsNull() {
+		return nil, fmt.Errorf("mlir: result type is required")
+	}
+	segmentAttr, err := mlir.ParseAttribute(ctx, "array<i32: "+strconv.Itoa(len(dynamicSizes))+", 0>")
+	if err != nil {
+		return nil, err
+	}
+	segmentNamedAttr, err := mlir.NamedAttributeByName(ctx, "operandSegmentSizes", segmentAttr)
+	if err != nil {
+		return nil, err
+	}
+	state := mlir.NewOperationState("memref.alloca", loc)
+	state.AddResults(resultType)
+	state.AddOperands(dynamicSizes...)
+	state.AddAttributes(segmentNamedAttr)
+	return mlir.CreateOperation(state)
+}
+
+func Load(loc mlir.Location, memref mlir.Value, indices ...mlir.Value) (*mlir.OwnedOperation, error) {
+	if memref.IsNull() {
+		return nil, fmt.Errorf("mlir: memref operand is required")
+	}
+	elementType := memref.Type().ElementType()
+	if elementType.IsNull() {
+		return nil, fmt.Errorf("mlir: memref operand must have shaped type")
+	}
+	state := mlir.NewOperationState("memref.load", loc)
+	state.AddResults(elementType)
+	state.AddOperands(memref)
+	state.AddOperands(indices...)
+	return mlir.CreateOperation(state)
+}
+
+func Store(loc mlir.Location, value mlir.Value, memref mlir.Value, indices ...mlir.Value) (*mlir.OwnedOperation, error) {
+	if value.IsNull() || memref.IsNull() {
+		return nil, fmt.Errorf("mlir: store operands are required")
+	}
+	state := mlir.NewOperationState("memref.store", loc)
+	state.AddOperands(value, memref)
+	state.AddOperands(indices...)
+	return mlir.CreateOperation(state)
+}

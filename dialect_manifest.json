@@ -1,0 +1,113 @@
+{
+  "dialects": [
+    {
+      "name": "arith",
+      "tablegen": [
+        "mlir/Dialect/Arith/IR/ArithOps.td"
+      ],
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/arith",
+      "package": "arith",
+      "strip_prefixes": [
+        "Arith_"
+      ],
+      "generate_tests": true
+    },
+    {
+      "name": "cf",
+      "tablegen": [
+        "mlir/Dialect/ControlFlow/IR/ControlFlowOps.td"
+      ],
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/cf",
+      "package": "cf",
+      "strip_prefixes": [
+        "CF_",
+        "ControlFlow_"
+      ],
+      "generate_tests": true
+    },
+    {
+      "name": "func",
+      "tablegen": [
+        "mlir/Dialect/Func/IR/FuncOps.td"
+      ],
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/func",
+      "package": "funcdialect",
+      "strip_prefixes": [
+        "Func_"
+      ],
+      "generate_tests": true
+    },
+    {
+      "name": "memref",
+      "tablegen": [
+        "mlir/Dialect/MemRef/IR/MemRefOps.td"
+      ],
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/memref",
+      "package": "memref",
+      "strip_prefixes": [
+        "MemRef_"
+      ],
+      "generate_tests": true
+    },
+    {
+      "name": "tensor",
+      "tablegen": [
+        "mlir/Dialect/Tensor/IR/TensorOps.td"
+      ],
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/tensor",
+      "package": "tensor",
+      "strip_prefixes": [
+        "Tensor_"
+      ],
+      "generate_tests": true
+    },
+    {
+      "name": "scf",
+      "tablegen": [
+        "mlir/Dialect/SCF/IR/SCFOps.td"
+      ],
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/scf",
+      "package": "scf",
+      "strip_prefixes": [
+        "SCF_"
+      ],
+      "generate_tests": true
+    },
+    {
+      "name": "vector",
+      "tablegen": [
+        "mlir/Dialect/Vector/IR/VectorOps.td"
+      ],
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/vector",
+      "package": "vector",
+      "strip_prefixes": [
+        "Vector_"
+      ],
+      "generate_tests": true
+    },
+    {
+      "name": "linalg",
+      "tablegen": [
+        "mlir/Dialect/Linalg/IR/LinalgOps.td"
+      ],
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/linalg",
+      "package": "linalg",
+      "strip_prefixes": [
+        "Linalg_"
+      ],
+      "generate_tests": true
+    },
+    {
+      "name": "llvm",
+      "tablegen": [
+        "mlir/Dialect/LLVMIR/LLVMOps.td"
+      ],
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/llvm",
+      "package": "llvmdialect",
+      "strip_prefixes": [
+        "LLVM_"
+      ],
+      "generate_tests": true
+    }
+  ]
+}

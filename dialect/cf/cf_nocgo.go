@@ -2,16 +2,12 @@
 
 package cf
 
-import (
-	"fmt"
+import mlir "github.com/timmyyuan/mlir-go"
 
-	mlir "github.com/timmyyuan/mlir-go"
-)
-
-func Branch(mlir.Location, mlir.Block, ...mlir.Value) (*mlir.OwnedOperation, error) {
-	return nil, fmt.Errorf("mlir: cgo is required")
+func Branch(loc mlir.Location, dest mlir.Block, operands ...mlir.Value) (*mlir.OwnedOperation, error) {
+	return BranchOp(loc, dest, operands...)
 }
 
-func CondBranch(*mlir.Context, mlir.Location, mlir.Value, mlir.Block, []mlir.Value, mlir.Block, []mlir.Value) (*mlir.OwnedOperation, error) {
-	return nil, fmt.Errorf("mlir: cgo is required")
+func CondBranch(ctx *mlir.Context, loc mlir.Location, cond mlir.Value, trueDest mlir.Block, trueOperands []mlir.Value, falseDest mlir.Block, falseOperands []mlir.Value) (*mlir.OwnedOperation, error) {
+	return CondBranchOp(ctx, loc, cond, trueDest, trueOperands, falseDest, falseOperands)
 }

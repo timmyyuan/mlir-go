@@ -2,39 +2,48 @@
 
 package arith
 
-import (
-	"fmt"
-
-	mlir "github.com/timmyyuan/mlir-go"
-)
+import mlir "github.com/timmyyuan/mlir-go"
 
 func Constant(ctx *mlir.Context, loc mlir.Location, resultType mlir.Type, value mlir.Attribute) (*mlir.OwnedOperation, error) {
-	if resultType.IsNull() {
-		return nil, fmt.Errorf("mlir: result type is required")
-	}
-	if value.IsNull() {
-		return nil, fmt.Errorf("mlir: value attribute is required")
-	}
-	valueAttr, err := mlir.NamedAttributeByName(ctx, "value", value)
-	if err != nil {
-		return nil, err
-	}
-	state := mlir.NewOperationState("arith.constant", loc)
-	state.AddResults(resultType)
-	state.AddAttributes(valueAttr)
-	return mlir.CreateOperation(state)
+	return ConstantOp(ctx, loc, resultType, value)
 }
 
 func AddI(loc mlir.Location, lhs, rhs mlir.Value) (*mlir.OwnedOperation, error) {
-	if lhs.IsNull() || rhs.IsNull() {
-		return nil, fmt.Errorf("mlir: operands are required")
-	}
-	resultType := lhs.Type()
-	if resultType.IsNull() || !resultType.Equal(rhs.Type()) {
-		return nil, fmt.Errorf("mlir: addi operands must have the same non-null type")
-	}
-	state := mlir.NewOperationState("arith.addi", loc)
-	state.AddResults(resultType)
-	state.AddOperands(lhs, rhs)
-	return mlir.CreateOperation(state)
+	return AddIOp(loc, lhs, rhs)
+}
+
+func SubI(loc mlir.Location, lhs, rhs mlir.Value) (*mlir.OwnedOperation, error) {
+	return SubIOp(loc, lhs, rhs)
+}
+
+func MulI(loc mlir.Location, lhs, rhs mlir.Value) (*mlir.OwnedOperation, error) {
+	return MulIOp(loc, lhs, rhs)
+}
+
+func ExtUI(loc mlir.Location, input mlir.Value, resultType mlir.Type) (*mlir.OwnedOperation, error) {
+	return ExtUIOp(loc, input, resultType)
+}
+
+func ExtSI(loc mlir.Location, input mlir.Value, resultType mlir.Type) (*mlir.OwnedOperation, error) {
+	return ExtSIOp(loc, input, resultType)
+}
+
+func TruncI(loc mlir.Location, input mlir.Value, resultType mlir.Type) (*mlir.OwnedOperation, error) {
+	return TruncIOp(loc, input, resultType)
+}
+
+func SIToFP(loc mlir.Location, input mlir.Value, resultType mlir.Type) (*mlir.OwnedOperation, error) {
+	return SIToFPOp(loc, input, resultType)
+}
+
+func FPToSI(loc mlir.Location, input mlir.Value, resultType mlir.Type) (*mlir.OwnedOperation, error) {
+	return FPToSIOp(loc, input, resultType)
+}
+
+func IndexCast(loc mlir.Location, input mlir.Value, resultType mlir.Type) (*mlir.OwnedOperation, error) {
+	return IndexCastOp(loc, input, resultType)
+}
+
+func CmpI(ctx *mlir.Context, loc mlir.Location, predicate string, lhs, rhs mlir.Value) (*mlir.OwnedOperation, error) {
+	return CmpIOp(ctx, loc, predicate, lhs, rhs)
 }

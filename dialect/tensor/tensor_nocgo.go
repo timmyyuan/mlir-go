@@ -2,20 +2,16 @@
 
 package tensor
 
-import (
-	"fmt"
+import mlir "github.com/timmyyuan/mlir-go"
 
-	mlir "github.com/timmyyuan/mlir-go"
-)
-
-func Empty(mlir.Location, mlir.Type, ...mlir.Value) (*mlir.OwnedOperation, error) {
-	return nil, fmt.Errorf("mlir: cgo is required")
+func Empty(loc mlir.Location, resultType mlir.Type, dynamicSizes ...mlir.Value) (*mlir.OwnedOperation, error) {
+	return EmptyOp(loc, resultType, dynamicSizes...)
 }
 
-func Dim(mlir.Location, mlir.Value, mlir.Value) (*mlir.OwnedOperation, error) {
-	return nil, fmt.Errorf("mlir: cgo is required")
+func Dim(loc mlir.Location, source mlir.Value, index mlir.Value) (*mlir.OwnedOperation, error) {
+	return DimOp(loc, source, index)
 }
 
-func Cast(mlir.Location, mlir.Value, mlir.Type) (*mlir.OwnedOperation, error) {
-	return nil, fmt.Errorf("mlir: cgo is required")
+func Cast(loc mlir.Location, source mlir.Value, resultType mlir.Type) (*mlir.OwnedOperation, error) {
+	return CastOp(loc, source, resultType)
 }

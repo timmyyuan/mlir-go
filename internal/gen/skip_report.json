@@ -1,0 +1,1627 @@
+{
+  "dialects": [
+    {
+      "name": "arith",
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/arith",
+      "package": "arith",
+      "sources": [
+        "mlir/Dialect/Arith/IR/ArithOps.td"
+      ],
+      "skipped_ops": [
+        {
+          "def_name": "Arith_AddUIExtendedOp",
+          "mnemonic": "addui_extended",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_MulSIExtendedOp",
+          "mnemonic": "mulsi_extended",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_MulUIExtendedOp",
+          "mnemonic": "mului_extended",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_DivUIOp",
+          "mnemonic": "divui",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_DivSIOp",
+          "mnemonic": "divsi",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_CeilDivUIOp",
+          "mnemonic": "ceildivui",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_CeilDivSIOp",
+          "mnemonic": "ceildivsi",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_FloorDivSIOp",
+          "mnemonic": "floordivsi",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_RemUIOp",
+          "mnemonic": "remui",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_RemSIOp",
+          "mnemonic": "remsi",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_AndIOp",
+          "mnemonic": "andi",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_OrIOp",
+          "mnemonic": "ori",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_XOrIOp",
+          "mnemonic": "xori",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_ShLIOp",
+          "mnemonic": "shli",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_ShRUIOp",
+          "mnemonic": "shrui",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_ShRSIOp",
+          "mnemonic": "shrsi",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_NegFOp",
+          "mnemonic": "negf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_AddFOp",
+          "mnemonic": "addf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_SubFOp",
+          "mnemonic": "subf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_MaximumFOp",
+          "mnemonic": "maximumf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_MaxNumFOp",
+          "mnemonic": "maxnumf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_MaxSIOp",
+          "mnemonic": "maxsi",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_MaxUIOp",
+          "mnemonic": "maxui",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_MinimumFOp",
+          "mnemonic": "minimumf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_MinNumFOp",
+          "mnemonic": "minnumf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_MinSIOp",
+          "mnemonic": "minsi",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_MinUIOp",
+          "mnemonic": "minui",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_MulFOp",
+          "mnemonic": "mulf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_DivFOp",
+          "mnemonic": "divf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_RemFOp",
+          "mnemonic": "remf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_ExtFOp",
+          "mnemonic": "extf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_TruncFOp",
+          "mnemonic": "truncf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_UIToFPOp",
+          "mnemonic": "uitofp",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_FPToUIOp",
+          "mnemonic": "fptoui",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_IndexCastUIOp",
+          "mnemonic": "index_castui",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_BitcastOp",
+          "mnemonic": "bitcast",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_CmpFOp",
+          "mnemonic": "cmpf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "SelectOp",
+          "mnemonic": "select",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        }
+      ]
+    },
+    {
+      "name": "cf",
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/cf",
+      "package": "cf",
+      "sources": [
+        "mlir/Dialect/ControlFlow/IR/ControlFlowOps.td"
+      ],
+      "skipped_ops": [
+        {
+          "def_name": "AssertOp",
+          "mnemonic": "assert",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/ControlFlow/IR/ControlFlowOps.td"
+        },
+        {
+          "def_name": "SwitchOp",
+          "mnemonic": "switch",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/ControlFlow/IR/ControlFlowOps.td"
+        }
+      ]
+    },
+    {
+      "name": "func",
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/func",
+      "package": "funcdialect",
+      "sources": [
+        "mlir/Dialect/Func/IR/FuncOps.td"
+      ],
+      "skipped_ops": [
+        {
+          "def_name": "CallIndirectOp",
+          "mnemonic": "call_indirect",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Func/IR/FuncOps.td"
+        },
+        {
+          "def_name": "ConstantOp",
+          "mnemonic": "constant",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Func/IR/FuncOps.td"
+        }
+      ]
+    },
+    {
+      "name": "memref",
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/memref",
+      "package": "memref",
+      "sources": [
+        "mlir/Dialect/MemRef/IR/MemRefOps.td"
+      ],
+      "skipped_ops": [
+        {
+          "def_name": "AssumeAlignmentOp",
+          "mnemonic": "assume_alignment",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_AllocOp",
+          "mnemonic": "alloc",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_ReallocOp",
+          "mnemonic": "realloc",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_AllocaScopeOp",
+          "mnemonic": "alloca_scope",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_AllocaScopeReturnOp",
+          "mnemonic": "alloca_scope.return",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_CastOp",
+          "mnemonic": "cast",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "CopyOp",
+          "mnemonic": "copy",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_DeallocOp",
+          "mnemonic": "dealloc",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_DimOp",
+          "mnemonic": "dim",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_DmaStartOp",
+          "mnemonic": "dma_start",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_DmaWaitOp",
+          "mnemonic": "dma_wait",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_ExtractAlignedPointerAsIndexOp",
+          "mnemonic": "extract_aligned_pointer_as_index",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_ExtractStridedMetadataOp",
+          "mnemonic": "extract_strided_metadata",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "GenericAtomicRMWOp",
+          "mnemonic": "generic_atomic_rmw",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "AtomicYieldOp",
+          "mnemonic": "atomic_yield",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_GetGlobalOp",
+          "mnemonic": "get_global",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_GlobalOp",
+          "mnemonic": "global",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_MemorySpaceCastOp",
+          "mnemonic": "memory_space_cast",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_PrefetchOp",
+          "mnemonic": "prefetch",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_ReinterpretCastOp",
+          "mnemonic": "reinterpret_cast",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_RankOp",
+          "mnemonic": "rank",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_ReshapeOp",
+          "mnemonic": "reshape",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_ExpandShapeOp",
+          "mnemonic": "expand_shape",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_CollapseShapeOp",
+          "mnemonic": "collapse_shape",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "SubViewOp",
+          "mnemonic": "subview",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_TransposeOp",
+          "mnemonic": "transpose",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "MemRef_ViewOp",
+          "mnemonic": "view",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "AtomicRMWOp",
+          "mnemonic": "atomic_rmw",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        }
+      ]
+    },
+    {
+      "name": "tensor",
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/tensor",
+      "package": "tensor",
+      "sources": [
+        "mlir/Dialect/Tensor/IR/TensorOps.td"
+      ],
+      "skipped_ops": [
+        {
+          "def_name": "Tensor_BitcastOp",
+          "mnemonic": "bitcast",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_ConcatOp",
+          "mnemonic": "concat",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_ExtractOp",
+          "mnemonic": "extract",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_ExtractSliceOp",
+          "mnemonic": "extract_slice",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_FromElementsOp",
+          "mnemonic": "from_elements",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_GatherOp",
+          "mnemonic": "gather",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_GenerateOp",
+          "mnemonic": "generate",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_InsertOp",
+          "mnemonic": "insert",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_InsertSliceOp",
+          "mnemonic": "insert_slice",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_RankOp",
+          "mnemonic": "rank",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_ReshapeOp",
+          "mnemonic": "reshape",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_ExpandShapeOp",
+          "mnemonic": "expand_shape",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_CollapseShapeOp",
+          "mnemonic": "collapse_shape",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_PadOp",
+          "mnemonic": "pad",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_ParallelInsertSliceOp",
+          "mnemonic": "parallel_insert_slice",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_ScatterOp",
+          "mnemonic": "scatter",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_SplatOp",
+          "mnemonic": "splat",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_PackOp",
+          "mnemonic": "pack",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_UnPackOp",
+          "mnemonic": "unpack",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        },
+        {
+          "def_name": "Tensor_YieldOp",
+          "mnemonic": "yield",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
+        }
+      ]
+    },
+    {
+      "name": "scf",
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/scf",
+      "package": "scf",
+      "sources": [
+        "mlir/Dialect/SCF/IR/SCFOps.td"
+      ],
+      "skipped_ops": [
+        {
+          "def_name": "ConditionOp",
+          "mnemonic": "condition",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/SCF/IR/SCFOps.td"
+        },
+        {
+          "def_name": "ExecuteRegionOp",
+          "mnemonic": "execute_region",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/SCF/IR/SCFOps.td"
+        },
+        {
+          "def_name": "ForOp",
+          "mnemonic": "for",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/SCF/IR/SCFOps.td"
+        },
+        {
+          "def_name": "ForallOp",
+          "mnemonic": "forall",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/SCF/IR/SCFOps.td"
+        },
+        {
+          "def_name": "InParallelOp",
+          "mnemonic": "forall.in_parallel",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/SCF/IR/SCFOps.td"
+        },
+        {
+          "def_name": "IfOp",
+          "mnemonic": "if",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/SCF/IR/SCFOps.td"
+        },
+        {
+          "def_name": "ParallelOp",
+          "mnemonic": "parallel",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/SCF/IR/SCFOps.td"
+        },
+        {
+          "def_name": "ReduceOp",
+          "mnemonic": "reduce",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/SCF/IR/SCFOps.td"
+        },
+        {
+          "def_name": "ReduceReturnOp",
+          "mnemonic": "ReduceOp",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/SCF/IR/SCFOps.td"
+        },
+        {
+          "def_name": "WhileOp",
+          "mnemonic": "while",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/SCF/IR/SCFOps.td"
+        },
+        {
+          "def_name": "IndexSwitchOp",
+          "mnemonic": "index_switch",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/SCF/IR/SCFOps.td"
+        },
+        {
+          "def_name": "YieldOp",
+          "mnemonic": "yield",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/SCF/IR/SCFOps.td"
+        }
+      ]
+    },
+    {
+      "name": "vector",
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/vector",
+      "package": "vector",
+      "sources": [
+        "mlir/Dialect/Vector/IR/VectorOps.td"
+      ],
+      "skipped_ops": [
+        {
+          "def_name": "Vector_ContractionOp",
+          "mnemonic": "contract",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_ReductionOp",
+          "mnemonic": "reduction",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_MultiDimReductionOp",
+          "mnemonic": "multi_reduction",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_ShuffleOp",
+          "mnemonic": "shuffle",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_InterleaveOp",
+          "mnemonic": "rhs",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_DeinterleaveOp",
+          "mnemonic": "deinterleave",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_ExtractOp",
+          "mnemonic": "extract",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_FMAOp",
+          "mnemonic": "fma",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_FromElementsOp",
+          "mnemonic": "from_elements",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_InsertElementOp",
+          "mnemonic": "insertelement",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_InsertOp",
+          "mnemonic": "insert",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_ScalableInsertOp",
+          "mnemonic": "scalable.insert",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_ScalableExtractOp",
+          "mnemonic": "scalable.extract",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_InsertStridedSliceOp",
+          "mnemonic": "insert_strided_slice",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_OuterProductOp",
+          "mnemonic": "outerproduct",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_ExtractStridedSliceOp",
+          "mnemonic": "extract_strided_slice",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_TransferReadOp",
+          "mnemonic": "transfer_read",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_TransferWriteOp",
+          "mnemonic": "transfer_write",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_LoadOp",
+          "mnemonic": "load",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_StoreOp",
+          "mnemonic": "store",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_MaskedLoadOp",
+          "mnemonic": "maskedload",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_MaskedStoreOp",
+          "mnemonic": "maskedstore",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_GatherOp",
+          "mnemonic": "gather",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_ScatterOp",
+          "mnemonic": "scatter",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_ExpandLoadOp",
+          "mnemonic": "expandload",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_CompressStoreOp",
+          "mnemonic": "compressstore",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_ShapeCastOp",
+          "mnemonic": "shape_cast",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_BitCastOp",
+          "mnemonic": "result",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_TypeCastOp",
+          "mnemonic": "type_cast",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_ConstantMaskOp",
+          "mnemonic": "constant_mask",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_CreateMaskOp",
+          "mnemonic": "create_mask",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_MaskOp",
+          "mnemonic": "mask",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_TransposeOp",
+          "mnemonic": "transpose",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_PrintOp",
+          "mnemonic": "print",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_MatmulOp",
+          "mnemonic": "matrix_multiply",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_FlatTransposeOp",
+          "mnemonic": "flat_transpose",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_SplatOp",
+          "mnemonic": "splat",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "VectorScaleOp",
+          "mnemonic": "vscale",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_ScanOp",
+          "mnemonic": "scan",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_StepOp",
+          "mnemonic": "step",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        },
+        {
+          "def_name": "Vector_YieldOp",
+          "mnemonic": "yield",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
+        }
+      ]
+    },
+    {
+      "name": "linalg",
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/linalg",
+      "package": "linalg",
+      "sources": [
+        "mlir/Dialect/Linalg/IR/LinalgOps.td"
+      ],
+      "skipped_ops": [
+        {
+          "def_name": "Linalg_SoftmaxOp",
+          "mnemonic": "softmax",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Linalg/IR/LinalgOps.td"
+        },
+        {
+          "def_name": "Linalg_WinogradFilterTransformOp",
+          "mnemonic": "winograd_filter_transform",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Linalg/IR/LinalgOps.td"
+        },
+        {
+          "def_name": "Linalg_WinogradInputTransformOp",
+          "mnemonic": "winograd_input_transform",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Linalg/IR/LinalgOps.td"
+        },
+        {
+          "def_name": "Linalg_WinogradOutputTransformOp",
+          "mnemonic": "winograd_output_transform",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Linalg/IR/LinalgOps.td"
+        }
+      ]
+    },
+    {
+      "name": "llvm",
+      "import_path": "github.com/timmyyuan/mlir-go/dialect/llvm",
+      "package": "llvmdialect",
+      "sources": [
+        "mlir/Dialect/LLVMIR/LLVMOps.td"
+      ],
+      "skipped_ops": [
+        {
+          "def_name": "LLVM_AddOp",
+          "mnemonic": "Add",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_SubOp",
+          "mnemonic": "Sub",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_MulOp",
+          "mnemonic": "Mul",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_UDivOp",
+          "mnemonic": "UDiv",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_SDivOp",
+          "mnemonic": "SDiv",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_URemOp",
+          "mnemonic": "URem",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_SRemOp",
+          "mnemonic": "SRem",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_AndOp",
+          "mnemonic": "And",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_OrOp",
+          "mnemonic": "Or",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_XOrOp",
+          "mnemonic": "Xor",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_ShlOp",
+          "mnemonic": "Shl",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_LShrOp",
+          "mnemonic": "LShr",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_AShrOp",
+          "mnemonic": "AShr",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_ICmpOp",
+          "mnemonic": "icmp",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_FCmpOp",
+          "mnemonic": "fcmp",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_FAddOp",
+          "mnemonic": "FAdd",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_FSubOp",
+          "mnemonic": "FSub",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_FMulOp",
+          "mnemonic": "FMul",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_FDivOp",
+          "mnemonic": "FDiv",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_FRemOp",
+          "mnemonic": "FRem",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_AllocaOp",
+          "mnemonic": "alloca",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_GEPOp",
+          "mnemonic": "getelementptr",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_LoadOp",
+          "mnemonic": "load",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_StoreOp",
+          "mnemonic": "store",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_BitcastOp",
+          "mnemonic": "BitCast",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_AddrSpaceCastOp",
+          "mnemonic": "AddrSpaceCast",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_IntToPtrOp",
+          "mnemonic": "IntToPtr",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_PtrToIntOp",
+          "mnemonic": "PtrToInt",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_SExtOp",
+          "mnemonic": "SExt",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_ZExtOp",
+          "mnemonic": "ZExt",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_TruncOp",
+          "mnemonic": "Trunc",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_SIToFPOp",
+          "mnemonic": "SIToFP",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_UIToFPOp",
+          "mnemonic": "UIToFP",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_FPToSIOp",
+          "mnemonic": "FPToSI",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_FPToUIOp",
+          "mnemonic": "FPToUI",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_FPExtOp",
+          "mnemonic": "FPExt",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_FPTruncOp",
+          "mnemonic": "FPTrunc",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_InvokeOp",
+          "mnemonic": "invoke",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_LandingpadOp",
+          "mnemonic": "landingpad",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_VaArgOp",
+          "mnemonic": "va_arg",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_CallOp",
+          "mnemonic": "call",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_ExtractElementOp",
+          "mnemonic": "extractelement",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_ExtractValueOp",
+          "mnemonic": "extractvalue",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_InsertElementOp",
+          "mnemonic": "insertelement",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_InsertValueOp",
+          "mnemonic": "res",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_ShuffleVectorOp",
+          "mnemonic": "shufflevector",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_SelectOp",
+          "mnemonic": "select",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_FreezeOp",
+          "mnemonic": "freeze",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_BrOp",
+          "mnemonic": "br",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_CondBrOp",
+          "mnemonic": "cond_br",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_ReturnOp",
+          "mnemonic": "return",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_ResumeOp",
+          "mnemonic": "resume",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_UnreachableOp",
+          "mnemonic": "unreachable",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_SwitchOp",
+          "mnemonic": "switch",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_AddressOfOp",
+          "mnemonic": "mlir.addressof",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_GlobalOp",
+          "mnemonic": "mlir.global",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_GlobalCtorsOp",
+          "mnemonic": "mlir.global_ctors",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_GlobalDtorsOp",
+          "mnemonic": "mlir.global_dtors",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_ComdatSelectorOp",
+          "mnemonic": "comdat_selector",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_ComdatOp",
+          "mnemonic": "comdat",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_LLVMFuncOp",
+          "mnemonic": "func",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_NoneTokenOp",
+          "mnemonic": "mlir.none",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_UndefOp",
+          "mnemonic": "mlir.undef",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_PoisonOp",
+          "mnemonic": "mlir.poison",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_ZeroOp",
+          "mnemonic": "mlir.zero",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_ConstantOp",
+          "mnemonic": "mlir.constant",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_AtomicRMWOp",
+          "mnemonic": "atomicrmw",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_AtomicCmpXchgOp",
+          "mnemonic": "cmpxchg",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_FenceOp",
+          "mnemonic": "fence",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_InlineAsmOp",
+          "mnemonic": "inline_asm",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_CallIntrinsicOp",
+          "mnemonic": "call_intrinsic",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_LinkerOptionsOp",
+          "mnemonic": "linker_options",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        }
+      ]
+    }
+  ]
+}

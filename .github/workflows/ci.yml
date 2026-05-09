@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  non-cgo:
+    name: Non-cgo Smoke
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+
+      - name: Run non-cgo smoke tests
+        env:
+          CGO_ENABLED: "0"
+        run: go test -count=1 ./...
+
+  docker-linux:
+    name: Dockerized Cgo And Generator
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Build development image
+        run: |
+          set -euxo pipefail
+          docker build --tag mlir-go-dev .
+
+      - name: Run cgo test suite in container
+        run: |
+          set -euxo pipefail
+          docker run --rm \
+            -v "$PWD":/workspace \
+            -w /workspace \
+            mlir-go-dev \
+            bash -lc 'eval "$(./scripts/dev-env.sh)" && go test -count=1 ./...'
+
+      - name: Validate generated artifacts in container
+        run: |
+          set -euxo pipefail
+          docker run --rm \
+            -v "$PWD":/workspace \
+            -w /workspace \
+            mlir-go-dev \
+            bash -lc 'eval "$(./scripts/dev-env.sh)" && go run ./cmd/mlir-go-tblgen -mode validate-manifest && bash ./scripts/update-generated.sh && git diff --exit-code'

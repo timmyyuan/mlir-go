@@ -60,6 +60,39 @@ The test suite has two layers:
 - regular Go tests for API behavior, ownership, mutation, passes, and execution
 - `FileCheck` fixtures for textual IR validation
 
+## Containerized Setup
+
+The repository also includes a `Dockerfile` for a reproducible Linux development environment.
+It targets `ubuntu:24.04`, installs LLVM/MLIR 20 from `apt.llvm.org`, and installs Go `1.25.0`.
+The image also provides unversioned `llvm-config` and `FileCheck` symlinks so the existing scripts work unchanged.
+The GitHub Actions Linux CI job builds and runs this same image.
+
+Build the image:
+
+```bash
+docker build -t mlir-go-dev .
+```
+
+Run the test suite inside the container:
+
+```bash
+docker run --rm -it \
+  -v "$PWD":/workspace \
+  -w /workspace \
+  mlir-go-dev \
+  bash -lc 'eval "$(./scripts/dev-env.sh)" && go test -count=1 ./...'
+```
+
+Check generated files inside the same environment:
+
+```bash
+docker run --rm -it \
+  -v "$PWD":/workspace \
+  -w /workspace \
+  mlir-go-dev \
+  bash -lc "eval \"\$(./scripts/dev-env.sh)\" && go run ./cmd/mlir-go-tblgen -mode validate-manifest && bash ./scripts/update-generated.sh && git diff --exit-code"
+```
+
 ## Generator Bootstrap
 
 The repository now includes a first generator entry point:

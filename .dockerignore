@@ -1,0 +1,17 @@
+.git
+.github
+.cache
+.direnv
+.DS_Store
+.idea
+.vscode
+bin
+dist
+coverage.*
+*.coverprofile
+*.out
+*.prof
+*.pprof
+*.tmp
+cpu.out
+mem.out

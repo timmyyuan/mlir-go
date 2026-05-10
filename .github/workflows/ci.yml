@@ -64,4 +64,5 @@ jobs:
             -v "$PWD":/workspace \
             -w /workspace \
             mlir-go-dev \
-            bash -lc 'eval "$(./scripts/dev-env.sh)" && go run ./cmd/mlir-go-tblgen -mode validate-manifest && bash ./scripts/update-generated.sh && git diff --exit-code'
+            bash -lc 'eval "$(./scripts/dev-env.sh)" && go run ./cmd/mlir-go-tblgen -mode validate-manifest && bash ./scripts/update-generated.sh'
+          git diff --exit-code

@@ -83,6 +83,16 @@ docker run --rm -it \
   bash -lc 'eval "$(./scripts/dev-env.sh)" && go test -count=1 ./...'
 ```
 
+Run the downstream consumer smoke test in the same environment:
+
+```bash
+docker run --rm -it \
+  -v "$PWD":/workspace \
+  -w /workspace \
+  mlir-go-dev \
+  bash -lc 'eval "$(./scripts/dev-env.sh)" && bash ./scripts/test-downstream-consumer.sh'
+```
+
 Check generated files inside the same environment:
 
 ```bash
@@ -158,6 +168,8 @@ cxx_runtime="-lc++" # use -lstdc++ on Linux
 export CGO_CPPFLAGS="-I$(llvm-config --includedir)"
 export CGO_LDFLAGS="-L$(llvm-config --libdir) -Wl,-rpath,$(llvm-config --libdir) -lMLIR -lMLIRCAPIIR -lMLIRCAPIRegisterEverything -lMLIRCAPITransforms -lMLIRCAPIConversion -lMLIRCAPIExecutionEngine -lMLIRExecutionEngine -lMLIRCAPIFunc -lMLIRCAPIArith -lMLIRCAPILLVM $(llvm-config --libs --system-libs) ${cxx_runtime}"
 ```
+
+The repository also includes [`scripts/test-downstream-consumer.sh`](scripts/test-downstream-consumer.sh) as a reference downstream integration check. It creates a temporary module outside the repository tree, imports `github.com/timmyyuan/mlir-go` plus builder helper packages, and runs a minimal IR-generation program.
 
 The current public API is still intentionally small, but it already supports parse, traversal, operand/attribute/successor queries, symbol lookup and rewrite flows, builtin type and attribute construction, shaped and memref type helpers, generic IR building, a first stateful builder with dialect emit helpers, verification, lowering, and JIT execution:
 

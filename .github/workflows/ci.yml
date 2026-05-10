@@ -57,6 +57,15 @@ jobs:
             mlir-go-dev \
             bash -lc 'eval "$(./scripts/dev-env.sh)" && go test -count=1 ./...'
 
+      - name: Run downstream consumer smoke test in container
+        run: |
+          set -euxo pipefail
+          docker run --rm \
+            -v "$PWD":/workspace \
+            -w /workspace \
+            mlir-go-dev \
+            bash -lc 'eval "$(./scripts/dev-env.sh)" && bash ./scripts/test-downstream-consumer.sh'
+
       - name: Validate generated artifacts in container
         run: |
           set -euxo pipefail

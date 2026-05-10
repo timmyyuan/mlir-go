@@ -9,8 +9,8 @@ That strategy is acceptable for experiments, but not for a Go module that users 
 
 ## Initial Baseline
 
-The initial implementation should target one stable LLVM/MLIR major release, for example `23.x`.
-The exact baseline can be adjusted before implementation starts, but it must be fixed explicitly and documented.
+The initial implementation targets one stable LLVM/MLIR major release: `22.x`.
+The baseline must be fixed explicitly in CI, the development container, and developer setup documentation.
 
 ## Upgrade Policy
 
@@ -40,4 +40,3 @@ The project should document these prerequisites:
 - a Go toolchain version declared in `go.mod`
 
 The build system should fail early with a readable error when the MLIR toolchain is missing or mismatched.
-

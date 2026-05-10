@@ -37,6 +37,8 @@ jobs:
     name: Dockerized Cgo And Generator
     runs-on: ubuntu-24.04
     timeout-minutes: 25
+    env:
+      LLVM_VERSION: "22"
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
@@ -44,7 +46,7 @@ jobs:
       - name: Build development image
         run: |
           set -euxo pipefail
-          docker build --tag mlir-go-dev .
+          docker build --build-arg LLVM_VERSION="${LLVM_VERSION}" --tag mlir-go-dev .
 
       - name: Run cgo test suite in container
         run: |

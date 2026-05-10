@@ -13,9 +13,14 @@ lib_dir="$("$llvm_config" --libdir)"
 bin_dir="$("$llvm_config" --bindir)"
 version="$("$llvm_config" --version)"
 llvm_libs="$("$llvm_config" --libs --system-libs)"
+case "$(uname -s)" in
+  Linux*) cxx_runtime="-lstdc++" ;;
+  Darwin*) cxx_runtime="-lc++" ;;
+  *) cxx_runtime="-lc++" ;;
+esac
 
 printf 'export MLIRGO_LLVM_CONFIG=%q\n' "$llvm_config"
 printf 'export MLIRGO_LLVM_VERSION=%q\n' "$version"
 printf 'export PATH=%q:$PATH\n' "$bin_dir"
 printf 'export CGO_CPPFLAGS=%q\n' "-I$include_dir"
-printf 'export CGO_LDFLAGS=%q\n' "-L$lib_dir -Wl,-rpath,$lib_dir -lMLIR -lMLIRCAPIIR -lMLIRCAPIRegisterEverything -lMLIRCAPITransforms -lMLIRCAPIConversion -lMLIRCAPIExecutionEngine -lMLIRExecutionEngine -lMLIRCAPIFunc -lMLIRCAPIArith -lMLIRCAPILLVM $llvm_libs -lc++"
+printf 'export CGO_LDFLAGS=%q\n' "-L$lib_dir -Wl,-rpath,$lib_dir -lMLIR -lMLIRCAPIIR -lMLIRCAPIRegisterEverything -lMLIRCAPITransforms -lMLIRCAPIConversion -lMLIRCAPIExecutionEngine -lMLIRExecutionEngine -lMLIRCAPIFunc -lMLIRCAPIArith -lMLIRCAPILLVM $llvm_libs $cxx_runtime"

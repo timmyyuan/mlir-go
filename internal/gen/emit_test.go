@@ -16,7 +16,7 @@ func TestEmitDialectMatchesCheckedInFiles(t *testing.T) {
 	}
 	includeRoot, err := ResolveIncludeRoot("")
 	if err != nil {
-		t.Fatalf("ResolveIncludeRoot() error = %v", err)
+		t.Skipf("skipping generated freshness test without an MLIR include root: %v", err)
 	}
 
 	for _, dialectName := range []string{"arith", "func", "cf", "memref", "tensor", "vector", "linalg"} {

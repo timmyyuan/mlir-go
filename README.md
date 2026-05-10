@@ -63,7 +63,7 @@ The test suite has two layers:
 ## Containerized Setup
 
 The repository also includes a `Dockerfile` for a reproducible Linux development environment.
-It targets `ubuntu:24.04`, installs LLVM/MLIR 20 from `apt.llvm.org`, and installs Go `1.25.0`.
+It targets `ubuntu:24.04`, installs LLVM/MLIR 22 from `apt.llvm.org`, and installs Go `1.25.0`.
 The image also provides unversioned `llvm-config` and `FileCheck` symlinks so the existing scripts work unchanged.
 The GitHub Actions Linux CI job builds and runs this same image.
 
@@ -150,11 +150,13 @@ import vector "github.com/timmyyuan/mlir-go/dialect/vector"
 ```
 
 Downstream projects need an equivalent `cgo` environment.
+Use `scripts/dev-env.sh` as the reference setup; it selects `-lc++` on Darwin and `-lstdc++` on Linux.
 A minimal setup for the current surface looks like:
 
 ```bash
+cxx_runtime="-lc++" # use -lstdc++ on Linux
 export CGO_CPPFLAGS="-I$(llvm-config --includedir)"
-export CGO_LDFLAGS="-L$(llvm-config --libdir) -Wl,-rpath,$(llvm-config --libdir) -lMLIR -lMLIRCAPIIR -lMLIRCAPIRegisterEverything -lMLIRCAPITransforms -lMLIRCAPIConversion -lMLIRCAPIExecutionEngine -lMLIRExecutionEngine -lMLIRCAPIFunc -lMLIRCAPIArith -lMLIRCAPILLVM $(llvm-config --libs --system-libs) -lc++"
+export CGO_LDFLAGS="-L$(llvm-config --libdir) -Wl,-rpath,$(llvm-config --libdir) -lMLIR -lMLIRCAPIIR -lMLIRCAPIRegisterEverything -lMLIRCAPITransforms -lMLIRCAPIConversion -lMLIRCAPIExecutionEngine -lMLIRExecutionEngine -lMLIRCAPIFunc -lMLIRCAPIArith -lMLIRCAPILLVM $(llvm-config --libs --system-libs) ${cxx_runtime}"
 ```
 
 The current public API is still intentionally small, but it already supports parse, traversal, operand/attribute/successor queries, symbol lookup and rewrite flows, builtin type and attribute construction, shaped and memref type helpers, generic IR building, a first stateful builder with dialect emit helpers, verification, lowering, and JIT execution:

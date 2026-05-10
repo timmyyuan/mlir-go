@@ -13,6 +13,6 @@ func BroadcastOp(mlir.Location, mlir.Value, mlir.Type) (*mlir.OwnedOperation, er
 	return nil, fmt.Errorf("mlir: cgo is required")
 }
 
-func ExtractElementOp(mlir.Location, mlir.Value, mlir.Type, ...mlir.Value) (*mlir.OwnedOperation, error) {
+func ExtractOp(*mlir.Context, mlir.Location, mlir.Value, mlir.Type, []int64, ...mlir.Value) (*mlir.OwnedOperation, error) {
 	return nil, fmt.Errorf("mlir: cgo is required")
 }

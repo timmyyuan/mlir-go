@@ -38,7 +38,7 @@ func SupportedOp(dialectName, defName string) bool {
 	case "tensor":
 		return defName == "Tensor_EmptyOp" || defName == "Tensor_DimOp" || defName == "Tensor_CastOp"
 	case "vector":
-		return defName == "Vector_BroadcastOp" || defName == "Vector_ExtractElementOp"
+		return defName == "Vector_BroadcastOp" || defName == "Vector_ExtractOp"
 	case "linalg":
 		return defName == "Linalg_YieldOp" || defName == "Linalg_IndexOp"
 	default:
@@ -200,7 +200,7 @@ func emitVectorDialect(ops []OperationDef) ([]GeneratedFile, error) {
 	for _, op := range ops {
 		defNames = append(defNames, op.DefName)
 	}
-	for _, required := range []string{"Vector_BroadcastOp", "Vector_ExtractElementOp"} {
+	for _, required := range []string{"Vector_BroadcastOp", "Vector_ExtractOp"} {
 		if !slices.Contains(defNames, required) {
 			return nil, fmt.Errorf("vector source is missing required op definition %q", required)
 		}
@@ -828,7 +828,8 @@ func renderVectorGenerated() string {
 	buf.WriteString("//go:build cgo\n\n")
 	buf.WriteString("package vector\n\n")
 	buf.WriteString("import (\n")
-	buf.WriteString("\t\"fmt\"\n\n")
+	buf.WriteString("\t\"fmt\"\n")
+	buf.WriteString("\t\"math\"\n\n")
 	buf.WriteString("\tmlir \"github.com/timmyyuan/mlir-go\"\n")
 	buf.WriteString(")\n\n")
 	buf.WriteString("func BroadcastOp(loc mlir.Location, source mlir.Value, resultType mlir.Type) (*mlir.OwnedOperation, error) {\n")
@@ -843,20 +844,32 @@ func renderVectorGenerated() string {
 	buf.WriteString("\tstate.AddOperands(source)\n")
 	buf.WriteString("\treturn mlir.CreateOperation(state)\n")
 	buf.WriteString("}\n\n")
-	buf.WriteString("func ExtractElementOp(loc mlir.Location, vector mlir.Value, resultType mlir.Type, position ...mlir.Value) (*mlir.OwnedOperation, error) {\n")
+	buf.WriteString("func ExtractOp(ctx *mlir.Context, loc mlir.Location, vector mlir.Value, resultType mlir.Type, staticPosition []int64, dynamicPosition ...mlir.Value) (*mlir.OwnedOperation, error) {\n")
 	buf.WriteString("\tif vector.IsNull() {\n")
 	buf.WriteString("\t\treturn nil, fmt.Errorf(\"mlir: vector operand is required\")\n")
 	buf.WriteString("\t}\n")
 	buf.WriteString("\tif resultType.IsNull() {\n")
 	buf.WriteString("\t\treturn nil, fmt.Errorf(\"mlir: result type is required\")\n")
 	buf.WriteString("\t}\n")
-	buf.WriteString("\tif len(position) > 1 {\n")
-	buf.WriteString("\t\treturn nil, fmt.Errorf(\"mlir: vector.extractelement accepts at most one dynamic position\")\n")
+	buf.WriteString("\tif len(staticPosition) == 0 && len(dynamicPosition) > 0 {\n")
+	buf.WriteString("\t\tstaticPosition = make([]int64, len(dynamicPosition))\n")
+	buf.WriteString("\t\tfor i := range staticPosition {\n")
+	buf.WriteString("\t\t\tstaticPosition[i] = math.MinInt64\n")
+	buf.WriteString("\t\t}\n")
 	buf.WriteString("\t}\n")
-	buf.WriteString("\tstate := mlir.NewOperationState(\"vector.extractelement\", loc)\n")
+	buf.WriteString("\tattr, err := mlir.DenseI64ArrayAttribute(ctx, staticPosition)\n")
+	buf.WriteString("\tif err != nil {\n")
+	buf.WriteString("\t\treturn nil, err\n")
+	buf.WriteString("\t}\n")
+	buf.WriteString("\tstaticPositionAttr, err := mlir.NamedAttributeByName(ctx, \"static_position\", attr)\n")
+	buf.WriteString("\tif err != nil {\n")
+	buf.WriteString("\t\treturn nil, err\n")
+	buf.WriteString("\t}\n")
+	buf.WriteString("\tstate := mlir.NewOperationState(\"vector.extract\", loc)\n")
 	buf.WriteString("\tstate.AddResults(resultType)\n")
 	buf.WriteString("\tstate.AddOperands(vector)\n")
-	buf.WriteString("\tstate.AddOperands(position...)\n")
+	buf.WriteString("\tstate.AddOperands(dynamicPosition...)\n")
+	buf.WriteString("\tstate.AddAttributes(staticPositionAttr)\n")
 	buf.WriteString("\treturn mlir.CreateOperation(state)\n")
 	buf.WriteString("}\n")
 	return buf.String()
@@ -874,7 +887,7 @@ func renderVectorGeneratedNoCgo() string {
 	buf.WriteString("func BroadcastOp(mlir.Location, mlir.Value, mlir.Type) (*mlir.OwnedOperation, error) {\n")
 	buf.WriteString("\treturn nil, fmt.Errorf(\"mlir: cgo is required\")\n")
 	buf.WriteString("}\n\n")
-	buf.WriteString("func ExtractElementOp(mlir.Location, mlir.Value, mlir.Type, ...mlir.Value) (*mlir.OwnedOperation, error) {\n")
+	buf.WriteString("func ExtractOp(*mlir.Context, mlir.Location, mlir.Value, mlir.Type, []int64, ...mlir.Value) (*mlir.OwnedOperation, error) {\n")
 	buf.WriteString("\treturn nil, fmt.Errorf(\"mlir: cgo is required\")\n")
 	buf.WriteString("}\n")
 	return buf.String()

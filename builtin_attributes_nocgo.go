@@ -20,6 +20,9 @@ func TypeAttribute(Type) (Attribute, error) { return Attribute{}, fmt.Errorf("ml
 func UnitAttribute(*Context) (Attribute, error) {
 	return Attribute{}, fmt.Errorf("mlir: cgo is required")
 }
+func DenseI64ArrayAttribute(*Context, []int64) (Attribute, error) {
+	return Attribute{}, fmt.Errorf("mlir: cgo is required")
+}
 
 func (a Attribute) IsInteger() bool                  { return false }
 func (a Attribute) Int64Value() (int64, error)       { return 0, fmt.Errorf("mlir: cgo is required") }

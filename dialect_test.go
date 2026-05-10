@@ -736,13 +736,13 @@ func TestGeneratedVectorWrappers(t *testing.T) {
 		t.Fatalf("entry.AppendOperation(broadcast) error = %v", err)
 	}
 
-	extract, err := vector.ExtractElement(loc, broadcastOp.Results()[0], i32, args[1])
+	extract, err := vector.ExtractElement(ctx, loc, broadcastOp.Results()[0], i32, args[1])
 	if err != nil {
 		t.Fatalf("vector.ExtractElement() error = %v", err)
 	}
 	extractOp, err := entry.AppendOperation(extract)
 	if err != nil {
-		t.Fatalf("entry.AppendOperation(extractelement) error = %v", err)
+		t.Fatalf("entry.AppendOperation(extract) error = %v", err)
 	}
 
 	ret, err := funcdialect.Return(loc, extractOp.Results()[0])

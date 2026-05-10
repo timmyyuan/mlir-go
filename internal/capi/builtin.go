@@ -357,3 +357,11 @@ func AttributeIsAUnit(attr Attribute) bool {
 func UnitAttrGet(ctx Context) Attribute {
 	return Attribute{c: C.mlirUnitAttrGet(ctx.c)}
 }
+
+func DenseI64ArrayAttrGet(ctx Context, values []int64) Attribute {
+	var data *C.int64_t
+	if len(values) > 0 {
+		data = (*C.int64_t)(unsafe.Pointer(&values[0]))
+	}
+	return Attribute{c: C.mlirDenseI64ArrayGet(ctx.c, C.intptr_t(len(values)), data)}
+}

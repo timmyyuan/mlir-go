@@ -5,6 +5,7 @@ package vector
 
 import (
 	"fmt"
+	"math"
 
 	mlir "github.com/timmyyuan/mlir-go"
 )
@@ -22,19 +23,31 @@ func BroadcastOp(loc mlir.Location, source mlir.Value, resultType mlir.Type) (*m
 	return mlir.CreateOperation(state)
 }
 
-func ExtractElementOp(loc mlir.Location, vector mlir.Value, resultType mlir.Type, position ...mlir.Value) (*mlir.OwnedOperation, error) {
+func ExtractOp(ctx *mlir.Context, loc mlir.Location, vector mlir.Value, resultType mlir.Type, staticPosition []int64, dynamicPosition ...mlir.Value) (*mlir.OwnedOperation, error) {
 	if vector.IsNull() {
 		return nil, fmt.Errorf("mlir: vector operand is required")
 	}
 	if resultType.IsNull() {
 		return nil, fmt.Errorf("mlir: result type is required")
 	}
-	if len(position) > 1 {
-		return nil, fmt.Errorf("mlir: vector.extractelement accepts at most one dynamic position")
+	if len(staticPosition) == 0 && len(dynamicPosition) > 0 {
+		staticPosition = make([]int64, len(dynamicPosition))
+		for i := range staticPosition {
+			staticPosition[i] = math.MinInt64
+		}
 	}
-	state := mlir.NewOperationState("vector.extractelement", loc)
+	attr, err := mlir.DenseI64ArrayAttribute(ctx, staticPosition)
+	if err != nil {
+		return nil, err
+	}
+	staticPositionAttr, err := mlir.NamedAttributeByName(ctx, "static_position", attr)
+	if err != nil {
+		return nil, err
+	}
+	state := mlir.NewOperationState("vector.extract", loc)
 	state.AddResults(resultType)
 	state.AddOperands(vector)
-	state.AddOperands(position...)
+	state.AddOperands(dynamicPosition...)
+	state.AddAttributes(staticPositionAttr)
 	return mlir.CreateOperation(state)
 }

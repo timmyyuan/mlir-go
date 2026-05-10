@@ -6,6 +6,7 @@ package capi
 #include <stdlib.h>
 #include <string.h>
 
+#include "llvm/Config/llvm-config.h"
 #include "mlir-c/IR.h"
 #include "mlir-c/Pass.h"
 #include "mlir-c/ExecutionEngine.h"
@@ -79,6 +80,14 @@ static struct MlirGoStringBuffer mlirGoPrintPassPipeline(MlirOpPassManager passM
 	struct MlirGoStringBuffer buf = {0};
 	mlirPrintPassPipeline(passManager, mlirGoStringCallback, &buf);
 	return buf;
+}
+
+static MlirExecutionEngine mlirGoExecutionEngineCreate(MlirModule op, int optLevel) {
+#if LLVM_VERSION_MAJOR >= 22
+	return mlirExecutionEngineCreate(op, optLevel, 0, NULL, false, false);
+#else
+	return mlirExecutionEngineCreate(op, optLevel, 0, NULL, false);
+#endif
 }
 
 static void mlirGoStringBufferDestroy(struct MlirGoStringBuffer buf) {
@@ -630,7 +639,7 @@ func PrintPassPipeline(opm OpPassManager) string {
 
 func ExecutionEngineCreate(module Module, optLevel int) ExecutionEngine {
 	return ExecutionEngine{
-		c: C.mlirExecutionEngineCreate(module.c, C.int(optLevel), 0, nil, C.bool(false)),
+		c: C.mlirGoExecutionEngineCreate(module.c, C.int(optLevel)),
 	}
 }
 

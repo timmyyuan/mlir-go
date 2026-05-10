@@ -78,6 +78,18 @@ func UnitAttribute(ctx *Context) (Attribute, error) {
 	return Attribute{raw: attr}, nil
 }
 
+func DenseI64ArrayAttribute(ctx *Context, values []int64) (Attribute, error) {
+	raw, err := ctx.requireRaw()
+	if err != nil {
+		return Attribute{}, err
+	}
+	attr := capi.DenseI64ArrayAttrGet(raw, values)
+	if capi.AttributeIsNull(attr) {
+		return Attribute{}, fmt.Errorf("mlir: failed to construct dense i64 array attribute")
+	}
+	return Attribute{raw: attr}, nil
+}
+
 func (a Attribute) IsInteger() bool {
 	return !a.IsNull() && capi.AttributeIsAInteger(a.raw)
 }

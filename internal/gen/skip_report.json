@@ -226,8 +226,22 @@
           "source": "mlir/Dialect/Arith/IR/ArithOps.td"
         },
         {
+          "def_name": "Arith_ScalingExtFOp",
+          "mnemonic": "scaling_extf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
           "def_name": "Arith_TruncFOp",
           "mnemonic": "truncf",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/Arith/IR/ArithOps.td"
+        },
+        {
+          "def_name": "Arith_ScalingTruncFOp",
+          "mnemonic": "scaling_truncf",
           "reason": "wrapper emission not implemented yet",
           "limitation": "generator",
           "source": "mlir/Dialect/Arith/IR/ArithOps.td"
@@ -335,6 +349,13 @@
         {
           "def_name": "AssumeAlignmentOp",
           "mnemonic": "assume_alignment",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
+        },
+        {
+          "def_name": "DistinctObjectsOp",
+          "mnemonic": "distinct_objects",
           "reason": "wrapper emission not implemented yet",
           "limitation": "generator",
           "source": "mlir/Dialect/MemRef/IR/MemRefOps.td"
@@ -658,20 +679,6 @@
           "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
         },
         {
-          "def_name": "Tensor_PackOp",
-          "mnemonic": "pack",
-          "reason": "wrapper emission not implemented yet",
-          "limitation": "generator",
-          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
-        },
-        {
-          "def_name": "Tensor_UnPackOp",
-          "mnemonic": "unpack",
-          "reason": "wrapper emission not implemented yet",
-          "limitation": "generator",
-          "source": "mlir/Dialect/Tensor/IR/TensorOps.td"
-        },
-        {
           "def_name": "Tensor_YieldOp",
           "mnemonic": "yield",
           "reason": "wrapper emission not implemented yet",
@@ -825,13 +832,6 @@
           "source": "mlir/Dialect/Vector/IR/VectorOps.td"
         },
         {
-          "def_name": "Vector_ExtractOp",
-          "mnemonic": "extract",
-          "reason": "wrapper emission not implemented yet",
-          "limitation": "generator",
-          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
-        },
-        {
           "def_name": "Vector_FMAOp",
           "mnemonic": "fma",
           "reason": "wrapper emission not implemented yet",
@@ -839,15 +839,15 @@
           "source": "mlir/Dialect/Vector/IR/VectorOps.td"
         },
         {
-          "def_name": "Vector_FromElementsOp",
-          "mnemonic": "from_elements",
+          "def_name": "Vector_ToElementsOp",
+          "mnemonic": "to_elements",
           "reason": "wrapper emission not implemented yet",
           "limitation": "generator",
           "source": "mlir/Dialect/Vector/IR/VectorOps.td"
         },
         {
-          "def_name": "Vector_InsertElementOp",
-          "mnemonic": "insertelement",
+          "def_name": "Vector_FromElementsOp",
+          "mnemonic": "from_elements",
           "reason": "wrapper emission not implemented yet",
           "limitation": "generator",
           "source": "mlir/Dialect/Vector/IR/VectorOps.td"
@@ -1016,27 +1016,6 @@
         {
           "def_name": "Vector_PrintOp",
           "mnemonic": "print",
-          "reason": "wrapper emission not implemented yet",
-          "limitation": "generator",
-          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
-        },
-        {
-          "def_name": "Vector_MatmulOp",
-          "mnemonic": "matrix_multiply",
-          "reason": "wrapper emission not implemented yet",
-          "limitation": "generator",
-          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
-        },
-        {
-          "def_name": "Vector_FlatTransposeOp",
-          "mnemonic": "flat_transpose",
-          "reason": "wrapper emission not implemented yet",
-          "limitation": "generator",
-          "source": "mlir/Dialect/Vector/IR/VectorOps.td"
-        },
-        {
-          "def_name": "Vector_SplatOp",
-          "mnemonic": "splat",
           "reason": "wrapper emission not implemented yet",
           "limitation": "generator",
           "source": "mlir/Dialect/Vector/IR/VectorOps.td"
@@ -1524,6 +1503,48 @@
           "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
         },
         {
+          "def_name": "LLVM_AliasOp",
+          "mnemonic": "mlir.alias",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_IFuncOp",
+          "mnemonic": "mlir.ifunc",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_DSOLocalEquivalentOp",
+          "mnemonic": "dso_local_equivalent",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_BlockAddressOp",
+          "mnemonic": "blockaddress",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_BlockTagOp",
+          "mnemonic": "blocktag",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_IndirectBrOp",
+          "mnemonic": "indirectbr",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
           "def_name": "LLVM_ComdatSelectorOp",
           "mnemonic": "comdat_selector",
           "reason": "wrapper emission not implemented yet",
@@ -1617,6 +1638,13 @@
         {
           "def_name": "LLVM_LinkerOptionsOp",
           "mnemonic": "linker_options",
+          "reason": "wrapper emission not implemented yet",
+          "limitation": "generator",
+          "source": "mlir/Dialect/LLVMIR/LLVMOps.td"
+        },
+        {
+          "def_name": "LLVM_ModuleFlagsOp",
+          "mnemonic": "module_flags",
           "reason": "wrapper emission not implemented yet",
           "limitation": "generator",
           "source": "mlir/Dialect/LLVMIR/LLVMOps.td"

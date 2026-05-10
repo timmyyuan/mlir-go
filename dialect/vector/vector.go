@@ -8,6 +8,6 @@ func Broadcast(loc mlir.Location, source mlir.Value, resultType mlir.Type) (*mli
 	return BroadcastOp(loc, source, resultType)
 }
 
-func ExtractElement(loc mlir.Location, vector mlir.Value, resultType mlir.Type, position ...mlir.Value) (*mlir.OwnedOperation, error) {
-	return ExtractElementOp(loc, vector, resultType, position...)
+func ExtractElement(ctx *mlir.Context, loc mlir.Location, vector mlir.Value, resultType mlir.Type, position ...mlir.Value) (*mlir.OwnedOperation, error) {
+	return ExtractOp(ctx, loc, vector, resultType, nil, position...)
 }
